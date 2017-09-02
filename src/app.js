@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import firebase from 'firebase';
 import { Header } from './components/common';
 import LoginForm  from './components/LoginForm';
+import { Input } from './components/common';
 
 
 class App extends Component {

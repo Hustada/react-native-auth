@@ -3,6 +3,7 @@ import { TextInput } from 'react-native';
 import { Button, Card, CardSection } from './common';
 
 //Text inputs have zero styling by default
+// react holds the text 'state' outside of user input
 class LoginForm extends Component {
 	//initialize state object
 	state = { text: ''};
