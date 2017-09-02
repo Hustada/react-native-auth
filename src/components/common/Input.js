@@ -2,23 +2,25 @@ import React from 'react';
 import { TextInput, View, Text } from 'react-native';
 	
 	//pass in label text as prop
-	const Input = ({ label, value, onChangeText }) => {
+	const Input = ({ label, value, onChangeText, placeholder }) => {
 		const { inputStyle, lableStyle, containerStyle } = styles;
 
 		return(
 			<View style={containerStyle}>
 				<Text style={lableStyle}>{label}</Text>
 				<TextInput
+					placeholder={placeholder}
+					autoCorrect={false}
 					style={inputStyle}
 					value={value}
 					onChangeText={onChangeText}
-					style={{ height: 20, width: 100 }}
 				/>
 			</View>
 		);
 	};
 //both input and text are children of the view tag
 //whenver we have siblings with a flex property. Thats how we allocate a proportion of available space to each one. add the values of flex 2 + 1 equals 3. So 1/3 and 2/3 for each respectively.
+
 	const styles = {
 		inputStyle: {
 			color: '#000',
