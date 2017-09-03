@@ -5,7 +5,7 @@ import { Button, Card, CardSection, Input } from './common';
 // react holds the text 'state' outside of user input
 class LoginForm extends Component {
 	//initialize state object
-	state = { email: ''};
+	state = { email: '', password: '' };
 	render() {
 		return (
 			<Card>
@@ -18,7 +18,15 @@ class LoginForm extends Component {
 					/>
 				</CardSection>
 
-				<CardSection />
+				<CardSection>
+				<Input
+					secureTextEntry
+					placeholder="password"
+					label="Password"
+					value={this.state.password}
+					onChangeText={password => this.setState({ password })}
+				/>
+				</CardSection>
 
 				<CardSection>
 					<Button>
