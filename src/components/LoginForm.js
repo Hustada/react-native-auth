@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import firebase from 'firebase';
-import { Button, Card, CardSection, Input } from './common';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 
 //Text inputs have zero styling by default
 // react holds the text 'state' outside of user input
@@ -11,18 +11,30 @@ import { Button, Card, CardSection, Input } from './common';
 
 class LoginForm extends Component {
 	//initialize state object
-	state = { email: '', password: '', error: '' };
+	state = { email: '', password: '', error: '', loading: false };
 	
 	onButtonPress() {
 		const { email, password } = this.state; // pass in email and password
 
-		this.setState({ error: '' }); //set this to empty object
+		this.setState({ error: '', loading: true }); //set this to empty object, loading true
 
 		firebase.auth().signInWithEmailAndPassword(email, password).catch(() => {
 			firebase.auth().createUserWithEmailAndPassword(email, password).catch(() => {
 				this.setState({ error: 'Authentication Failed.' });
 			});
 		}); //catch errors
+	}
+
+	renderButton() {
+		if (this.state.loading) {
+			return <Spinner size="small"/>;
+		}
+
+		return (
+			<Button onPress={this.onButtonPress.bind(this)}>
+				Login
+			</Button>
+		);
 	}
 
 	render() {
@@ -53,9 +65,7 @@ class LoginForm extends Component {
 				</Text>
 
 				<CardSection>
-					<Button onPress={this.onButtonPress.bind(this)}>
-						Login
-					</Button>
+					{this.renderButton()}
 				</CardSection>
 			</Card>
 		);
